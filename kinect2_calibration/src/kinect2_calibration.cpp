@@ -1093,8 +1093,11 @@ private:
     cv::solvePnPRansac(board, points[index], cameraMatrix, distortion, rvec, translation, false, 300, 0.05, board.size(), cv::noArray(), cv::ITERATIVE);
 #elif CV_MAJOR_VERSION == 3
     cv::solvePnPRansac(board, points[index], cameraMatrix, distortion, rvec, translation, false, 300, 0.05, 0.99, cv::noArray(), cv::SOLVEPNP_ITERATIVE);
+#elif CV_MAJOR_VERSION == 4
+    cv::solvePnPRansac(board, points[index], cameraMatrix, distortion, rvec, translation, false, 300, 0.05, 0.99, cv::noArray(), cv::SOLVEPNP_EPNP);
 #endif
     cv::Rodrigues(rvec, rotation);
+
 
     normal = cv::Mat(3, 1, CV_64F);
     normal.at<double>(0) = 0;
